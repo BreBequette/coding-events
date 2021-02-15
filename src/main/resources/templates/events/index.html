@@ -12,11 +12,28 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Description</th>
+            <th>Address</th>
         </tr>
     </thead>
-    <tr th:each="event : ${events}">
-        <td th:text="${event}"></td>
-    </tr>
+<!--    <tr th:each="event : ${events}">-->
+<!--        <td th:text="${event}"></td>-->
+<!--    </tr>-->
+    <th:block th:each="event : ${events}">
+        <tr>
+            <td th:text="${event.key}"></td>
+            <td th:text="${event.value}"></td>
+            <th:block th:if='${event.key.equals("LC101 Graduation")}'>
+                <td th:replace="fragments :: lc101GradAddress"></td>
+            </th:block>
+            <th:block th:if='${event.key.equals("Code Camp")}'>
+                <td th:replace="fragments :: codeCampAddress"></td>
+            </th:block>
+            <th:block th:if='${event.key.equals("STL Hackathon")}'>
+                <td th:replace="fragments :: stlHackathonAddress"></td>
+            </th:block>
+        </tr>
+    </th:block>
 </table>
 
 </body>
