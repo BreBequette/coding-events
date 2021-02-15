@@ -8,6 +8,11 @@
 
 <h1>All Events</h1>
 
+<nav th:replace="fragments :: navigation"></nav>
+
+
+<p th:unless="${events} and ${events.size()}">No events yet</p>
+
 <ul>
     <th:block th:each="event : ${events}">
         <li th:text="${event}"></li>
