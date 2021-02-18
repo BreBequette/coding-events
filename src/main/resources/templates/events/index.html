@@ -9,31 +9,42 @@
 <p th:unless="${events} and ${events.size()}">No events yet</p>
 
 <table class="table table-striped">
+
+<!--    below was used when event was a hashmap-->
+<!--    <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Description</th>-->
+<!--            <th>Address</th>-->
+<!--        </tr>-->
+<!--    </thead>-->
+<!--    <th:block th:each="event : ${events}">-->
+<!--        <tr>-->
+<!--            <td th:text="${event.key}"></td>-->
+<!--            <td th:text="${event.value}"></td>-->
+<!--            <th:block th:if='${event.key.equals("LC101 Graduation")}'>-->
+<!--                <td th:replace="fragments :: lc101GradAddress"></td>-->
+<!--            </th:block>-->
+<!--            <th:block th:if='${event.key.equals("Code Camp")}'>-->
+<!--                <td th:replace="fragments :: codeCampAddress"></td>-->
+<!--            </th:block>-->
+<!--            <th:block th:if='${event.key.equals("STL Hackathon")}'>-->
+<!--                <td th:replace="fragments :: stlHackathonAddress"></td>-->
+<!--            </th:block>-->
+<!--        </tr>-->
+<!--    </th:block>-->
     <thead>
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
-            <th>Address</th>
         </tr>
     </thead>
-<!--    <tr th:each="event : ${events}">-->
-<!--        <td th:text="${event}"></td>-->
-<!--    </tr>-->
-    <th:block th:each="event : ${events}">
-        <tr>
-            <td th:text="${event.key}"></td>
-            <td th:text="${event.value}"></td>
-            <th:block th:if='${event.key.equals("LC101 Graduation")}'>
-                <td th:replace="fragments :: lc101GradAddress"></td>
-            </th:block>
-            <th:block th:if='${event.key.equals("Code Camp")}'>
-                <td th:replace="fragments :: codeCampAddress"></td>
-            </th:block>
-            <th:block th:if='${event.key.equals("STL Hackathon")}'>
-                <td th:replace="fragments :: stlHackathonAddress"></td>
-            </th:block>
-        </tr>
-    </th:block>
+    <tr th:each="event: ${events}">
+        <td th:text="${event.id}"></td>
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.description}"></td>
+    </tr>
 </table>
 
 </body>
