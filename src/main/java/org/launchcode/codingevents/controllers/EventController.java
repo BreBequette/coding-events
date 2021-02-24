@@ -2,13 +2,13 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("events")
@@ -23,15 +23,22 @@ public class EventController {
 
     //lives at /events/create
     @GetMapping("create")
-    public String renderCreateEventForm(){
+    public String renderCreateEventForm(Model model){
+        model.addAttribute(new Event());
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
 
     //lives at /events/create - OK because they have 2 diff types of requests
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute Event newEvent){
-        EventData.addNew(newEvent);
-        return "redirect:";
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model){
+        if(errors.hasErrors()){
+            return "events/create";
+        } else {
+            EventData.addNew(newEvent);
+            return "redirect:";
+        }
+
     }
 
     @GetMapping("delete")
@@ -48,8 +55,25 @@ public class EventController {
                 EventData.remove(id);
             }
         }
-
         return "redirect:";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        Event event = EventData.getById(eventId);
+        String title = "Edit Event " + event.getName() + " " + event.getId();
+        model.addAttribute("title", title);
+        model.addAttribute("event", event);
+        return "events/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String name, String description) {
+        // controller code will go here
+        Event myEvent = EventData.getById(eventId);
+        myEvent.setName(name);
+        myEvent.setDescription(description);
+        return "redirect:/events";
     }
 
 }
