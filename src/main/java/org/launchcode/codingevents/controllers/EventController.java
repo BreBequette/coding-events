@@ -26,6 +26,7 @@ public class EventController {
     public String renderCreateEventForm(Model model){
         model.addAttribute(new Event());
         model.addAttribute("types", EventType.values());
+        //model.addAttribute("date", new Date());
         return "events/create";
     }
 

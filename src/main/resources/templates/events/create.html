@@ -14,18 +14,21 @@
         </label>
         <p class="error" th:errors="${event.name}"></p>
     </div>
+
     <div class="form-group">
         <label>Description:
             <input th:field="${event.description}" class="form-control">
         </label>
         <p class="error" th:errors="${event.description}"></p>
     </div>
+
     <div class="form-group">
         <label>Contact Email:
             <input th:field="${event.contactEmail}" class="form-control">
         </label>
         <p class="error" th:errors="${event.contactEmail}"></p>
     </div>
+
     <div class="form-group">
         <label>Type:
             <select th:field="${event.type}">
@@ -37,6 +40,36 @@
             </select>
         </label>
     </div>
+
+    <div class="form-group">
+        <label>Location:
+            <input th:field="${event.location}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.location}"></p>
+    </div>
+
+    <div class="form-group">
+        <label>Requires registration?:
+            <input type="radio" name="requiresRegistration" value="true" th:text="True" class="form-control">
+            <input type="radio" name="requiresRegistration" value="false" th:text="False" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.requiresRegistration}"></p>
+    </div>
+
+    <div class="form-group">
+        <label>Number of Attendees:
+            <input type="text" name="numberOfAttendees" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.numberOfAttendees}"></p>
+    </div>
+
+    <div class="form-group">
+        <label>Date:
+            <input type="date" th:field="${event.date}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.date}"></p>
+    </div>
+
     <div class="form-group">
         <input type="submit" value="Create Event" class="btn btn-success">
     </div>

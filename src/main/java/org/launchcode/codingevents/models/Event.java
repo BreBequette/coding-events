@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Event {
@@ -21,15 +19,37 @@ public class Event {
     @NotBlank(message = "This field cannot be left blank")
     private String contactEmail;
 
+    @NotBlank(message = "This field cannot be left blank")
+    @NotNull(message = "This field cannot be left blank")
+    @Size(min = 3, max = 50, message = "Location must be between 3 and 50 characters")
+    private String location;
+
+    @NotNull(message = "Please make a selection")
+    @AssertTrue(message = "Must be marked 'true'")
+    private boolean requiresRegistration;
+
+    //@NotBlank(message = "This field cannot be left blank")
+    @NotNull(message = "This field cannot be left blank")
+    @Min(value = 1, message = "Please enter a positive integer")
+    private Integer numberOfAttendees;
+
+    //@Future(message = "Must be in the future")
+    //private Date date;
+    private String date;
+
     //doesn't need validation because of the nature of enums
     private EventType type;
 
-    public Event(String name, String description, String contactEmail, EventType type) {
+    public Event(String name, String description, String contactEmail, EventType type, String location, Boolean requiresRegistration, Integer numberOfAttendees, String date) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.type = type;
+        this.location = location;
+        this.requiresRegistration = requiresRegistration;
+        this.numberOfAttendees = numberOfAttendees;
+        this.date = date;
     }
 
     public Event(){
@@ -72,6 +92,47 @@ public class Event {
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public boolean isRequiresRegistration() {
+        return requiresRegistration;
+    }
+
+    public void setRequiresRegistration(boolean requiresRegistration) {
+        this.requiresRegistration = requiresRegistration;
+    }
+
+    public Integer getNumberOfAttendees() {
+        return numberOfAttendees;
+    }
+
+    public void setNumberOfAttendees(Integer numberOfAttendees) {
+        this.numberOfAttendees = numberOfAttendees;
+    }
+
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 
     //no setter for ID because it should never be changed
 
