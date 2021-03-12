@@ -1,12 +1,18 @@
 package org.launchcode.codingevents.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+@Entity
 public class Event {
 
+
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
 
     @NotBlank(message = "This field cannot be left blank")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
@@ -41,7 +47,6 @@ public class Event {
     private EventType type;
 
     public Event(String name, String description, String contactEmail, EventType type, String location, Boolean requiresRegistration, Integer numberOfAttendees, String date) {
-        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
@@ -52,10 +57,7 @@ public class Event {
         this.date = date;
     }
 
-    public Event(){
-        this.id = nextId;
-        nextId++;
-    }
+    public Event(){}
 
     public EventType getType() {
         return type;
